@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> maxSubsequence(vector<int>& nums, int k) {
+        int sum = 0;
+        int s = 0;
+        for(int i = 0; i < k; i++){
+            sum += nums[i];
+        } //initialization
+        
+        //implement sliding window
+        int temp = sum;
+        for(int i=0; i< (nums.size() - k); i++){
+            temp = temp + nums[i+k] - nums[i];
+            if(temp > sum){
+                sum = temp;
+                s = i+1;
+            }
+        }
+        auto first = nums.begin() + s;
+        auto last = nums.begin()+s+k;
+        
+        vector<int> v(first, last);
+
+        return v;
+    }
+};
